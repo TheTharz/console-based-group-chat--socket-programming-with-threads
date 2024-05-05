@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class OmiGame {
+public class OmiGameLogic {
     private Team team1;
     private Team team2;
     private Deck deck;
@@ -13,7 +13,7 @@ public class OmiGame {
     private List<Card> currentTrick;
     private Suit trumps;
 
-    public OmiGame() {
+    public OmiGameLogic() {
         initializeGame();
     }
 
@@ -183,7 +183,6 @@ public class OmiGame {
         // Clear the current trick for the next round
         currentTrick.clear();
     }
-
     private Player getPlayerByCard(Card card) {
         if (team1.getPlayer1().hasCard(card)) {
             return team1.getPlayer1();
@@ -219,8 +218,13 @@ public class OmiGame {
         }
     }
 
-    public static void main(String[] args) {
-        OmiGame omiGame = new OmiGame();
-        omiGame.playGame();
+    // New method to process input
+    public void processInput(String input) {
+        if (input.equals("playGame")) {
+            playGame();
+        } else {
+            System.out.println("Invalid input. Please enter 'playGame' to start the game.");
+        }
+
     }
 }
