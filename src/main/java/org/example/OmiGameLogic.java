@@ -28,10 +28,20 @@ public class OmiGameLogic {
         public void paintComponent(Graphics g){
             super.paintComponent(g);
 
-            // draw hidden card
-            Image hiddenCardImg = new ImageIcon(getClass()
-                    .getResource("./src/main/resources/cards/BACK.png")).getImage();
-            g.drawImage(hiddenCardImg, 20, 20, cardWidth,cardHeight,null);
+            try {
+                //draw hidden card
+                Image hiddenCardImg = new ImageIcon(getClass().getResource("/cards/BACK.png")).getImage();
+                if (!stayButton.isEnabled()) {
+                 //   hiddenCardImg = new ImageIcon(getClass().getResource(hiddenCard.getImagePath())).getImage();
+                }
+                g.drawImage(hiddenCardImg, 20, 20, cardWidth, cardHeight, null);
+
+
+            } catch (Exception e) {
+                e.printStackTrace(); // Print the exception details for debugging
+            }
+
+
         }
     };
     JPanel buttonPanel = new JPanel();
