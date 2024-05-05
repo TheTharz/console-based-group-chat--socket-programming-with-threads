@@ -5,9 +5,9 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
-    private Socket socket;
-    private BufferedReader bufferedReader;
-    private BufferedWriter bufferedWriter;
+    public Socket socket;
+    public BufferedReader bufferedReader;
+    public BufferedWriter bufferedWriter;
     private String username;
 
     public Client(Socket socket,String username){
