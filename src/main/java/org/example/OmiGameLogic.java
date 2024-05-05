@@ -1,5 +1,6 @@
 package org.example;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,8 +14,19 @@ public class OmiGameLogic {
     private List<Card> currentTrick;
     private Suit trumps;
 
+    // window
+    int windowWidth = 800;
+    int windowHeight = 600;
+
+    JFrame frame = new JFrame("Omi Game");
+
     public OmiGameLogic() {
         initializeGame();
+        frame.setVisible(true);
+        frame.setSize(windowWidth, windowHeight);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void initializeGame() {
