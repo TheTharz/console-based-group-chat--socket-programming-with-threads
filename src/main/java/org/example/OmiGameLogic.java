@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +19,24 @@ public class OmiGameLogic {
     int windowWidth = 800;
     int windowHeight = 600;
 
+    int cardWidth = 110; //ratio should 1/1.4
+    int cardHeight = 154;
+
     JFrame frame = new JFrame("Omi Game");
+    JPanel gamePanel = new JPanel(){
+        @Override
+        public void paintComponent(Graphics g){
+            super.paintComponent(g);
+
+            // draw hidden card
+            Image hiddenCardImg = new ImageIcon(getClass()
+                    .getResource("./src/main/resources/cards/BACK.png")).getImage();
+            g.drawImage(hiddenCardImg, 20, 20, cardWidth,cardHeight,null);
+        }
+    };
+    JPanel buttonPanel = new JPanel();
+    JButton hintButton = new JButton("Hit");
+    JButton stayButton = new JButton("Stay");
 
     public OmiGameLogic() {
         initializeGame();
@@ -27,6 +45,16 @@ public class OmiGameLogic {
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        gamePanel.setLayout(new BorderLayout());
+        gamePanel.setBackground(new Color(53,101,77));
+        frame.add(gamePanel);
+
+        hintButton.setFocusable(false);
+        buttonPanel.add(hintButton);
+        stayButton.setFocusable(false);
+        buttonPanel.add(stayButton);
+        frame.add(buttonPanel , BorderLayout.SOUTH);
     }
 
     private void initializeGame() {
