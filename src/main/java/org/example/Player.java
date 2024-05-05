@@ -10,7 +10,6 @@ public class Player {
     private String name;
     private List<Card> hand;
     private BufferedReader reader;
-    private List<List<Card>> tricks;
 
     public Player(String name){
         this.name = name;
@@ -69,15 +68,6 @@ public class Player {
 
     public List<Card> getHand() {
         return hand;
-    }
-
-    public List<List<Card>> getTricks() {
-        return tricks;
-    }
-
-    // Method to add a trick to the player's tricks list
-    public void addTrick(List<Card> trick) {
-        tricks.add(trick);
     }
 
     public void printHand() {
