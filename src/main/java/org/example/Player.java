@@ -56,11 +56,14 @@ public class Player {
         }
 
         Card selectedCard = new Card(rank, suit);
-        if (!hand.contains(selectedCard)) {
+        System.out.println(selectedCard);
+        if (hand.contains(selectedCard)) {
+            printHand();
             System.out.println("You don't have that card. Please select a card from your hand.");
             return playCard();
         }
 
+        hand.remove(selectedCard);
         return selectedCard;
     }
 
@@ -75,5 +78,12 @@ public class Player {
     // Method to add a trick to the player's tricks list
     public void addTrick(List<Card> trick) {
         tricks.add(trick);
+    }
+
+    public void printHand() {
+        System.out.println(name+" Your hand:");
+        for (Card card : hand) {
+            System.out.println(card);
+        }
     }
 }
