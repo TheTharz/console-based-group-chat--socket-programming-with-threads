@@ -135,6 +135,7 @@ public class OmiGame {
         }
 
         determineTrickWinner();
+        removePlayedCards();
     }
 
     private Player getNextPlayer(Player currentPlayer) {
@@ -180,6 +181,15 @@ public class OmiGame {
             System.out.println("Trick tied. No winner.");
         }
 
+    }
+
+    private void removePlayedCards(){
+        for(Card card : currentTrick){
+            team1.getPlayer1().removeFromDeck(card);
+            team1.getPlayer2().removeFromDeck(card);
+            team2.getPlayer1().removeFromDeck(card);
+            team2.getPlayer2().removeFromDeck(card);
+        }
         // Clear the current trick for the next round
         currentTrick.clear();
     }

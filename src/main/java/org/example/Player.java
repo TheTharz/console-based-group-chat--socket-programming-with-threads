@@ -17,12 +17,33 @@ public class Player {
         reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
+
+
+
     public void addToDeck(Card card){
         hand.add(card);
     }
 
+    public int findCardIndex(Card card) {
+        Rank targetRank = card.getRank();
+        Suit targetSuit = card.getSuit();
+
+        for (int i = 0; i < hand.size(); i++) {
+            Card currentCard = hand.get(i);
+            if (currentCard.getRank() == targetRank && currentCard.getSuit() == targetSuit) {
+                return i; // Return the index if the card with matching rank and suit is found
+            }
+        }
+        return -1; // Return -1 if the card is not found in the hand
+    }
+
     public void removeFromDeck(Card card){
-        hand.remove(card);
+        int index = findCardIndex(card);
+        if (index != -1) {
+            hand.remove(index);
+        } else {
+            //System.out.println("Card not found in the hand.");
+        }
     }
 
     public boolean hasCard(Card card) {
