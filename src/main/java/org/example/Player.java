@@ -25,9 +25,20 @@ public class Player {
         hand.remove(card);
     }
 
-    public boolean hasCard(Card card){
-        return hand.contains(card);
+    public boolean hasCard(Card card) {
+        Rank targetRank = card.getRank();
+        Suit targetSuit = card.getSuit();
+
+        for (Card c : hand) {
+            Rank currentRank = c.getRank();
+            Suit currentSuit = c.getSuit();
+            if (currentRank == targetRank && currentSuit == targetSuit) {
+                return true; // Card found in the hand
+            }
+        }
+        return false; // Card not found in the hand
     }
+
 
     public String getName(){
         return name;
