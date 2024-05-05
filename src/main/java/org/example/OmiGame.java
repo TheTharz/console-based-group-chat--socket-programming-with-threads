@@ -12,6 +12,7 @@ public class OmiGame {
     private int dealerIndex;
     private List<Card> currentTrick;
     private Suit trumps;
+    private Player winner;
 
     public OmiGame() {
         initializeGame();
@@ -55,6 +56,7 @@ public class OmiGame {
     private void nameTrumps() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Player to the right of the dealer, please name trumps (CLUBS, DIAMONDS, HEARTS, SPADES):");
+        getCurrentRightPlayer().printHand();
 
         try {
             String trumpInput = scanner.nextLine().toUpperCase();
@@ -94,6 +96,20 @@ public class OmiGame {
         }
     }
 
+    private Player getCurrentRightPlayer() {
+        int rightIndex = (dealerIndex - 1) % 4;
+        switch (rightIndex) {
+            case 0:
+                return team1.getPlayer1();
+            case 1:
+                return team1.getPlayer2();
+            case 2:
+                return team2.getPlayer1();
+            default:
+                return team2.getPlayer2();
+        }
+    }
+
     private boolean isValidPlay(Player player, Card card) {
         if (currentTrick.isEmpty()) {
             return true; // First card in the trick, any card is valid
@@ -116,7 +132,12 @@ public class OmiGame {
 
     private void playTrick() {
         currentTrick.clear(); // Clear the current trick
-        Player currentPlayer = getCurrentDealer(); // Start with the player to the right of the dealer
+        Player currentPlayer;
+        if(roundNumber==1){
+            currentPlayer = getCurrentRightPlayer(); // Start with the player to the right of the dealer
+        }else{
+            currentPlayer = winner;
+        }
 
         while (currentTrick.size() < 4) {
             System.out.println(currentPlayer.getName() + "'s turn.");
@@ -176,7 +197,7 @@ public class OmiGame {
 
         if (trickWinner != null) {
             System.out.println("Trick won by " + trickWinner.getName());
-
+            winner = trickWinner;
         } else {
             System.out.println("Trick tied. No winner.");
         }
